@@ -1,0 +1,28 @@
+﻿@page "/conferenzefuture"
+@using Demo.Core.Conferenze
+@using DemoBlazorLezione2.Core.Conferenze
+@using DemoBlazorLezione2.UI.Library
+
+@inject IServizioConferenze servizioConferenze
+@inject IMarketing servizioMarketing
+
+<ListaConferenze OnConferenzaCancellata="EliminaConferenzaFutura"
+    Conferenze="@conferenze" Titolo="@titolo" />
+
+@code {
+    
+    private List<Conferenza>? conferenze = new();
+    private string titolo = "xxxx";
+
+    protected override void OnInitialized()
+    {
+       conferenze = servizioConferenze.EstraiConferenzeFuture();
+       titolo = servizioMarketing.EstraiTitoloConferenza();
+    }
+
+    private void EliminaConferenzaFutura(Conferenza conferenza)
+    {
+        servizioConferenze.CancellaConferenzaFutura(conferenza.Id);
+    }
+
+}

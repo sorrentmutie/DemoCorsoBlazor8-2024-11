@@ -1,0 +1,36 @@
+﻿@page "/"
+@using DemoBlazorLezione2.UI.Library
+@using DemoBlazorLezione2.Core.Conferenze   
+@inject IServizioConferenze servizioConferenze
+
+<PageTitle>Index</PageTitle>
+
+<h1>Hello, world!</h1>
+
+
+
+<ListaConferenze 
+    Conferenze="conferenze" 
+    OnConferenzaCancellata="EliminaConferenzaPassata"
+    Titolo="Conferenze Passate" />
+
+@code {   
+
+    private List<Conferenza>? conferenze = new(); 
+
+    protected override void OnInitialized()
+    {
+        conferenze = servizioConferenze.EstraiConferenzePassate();
+    }
+
+
+    private void EliminaConferenzaPassata(Conferenza conferenza)
+    {
+        servizioConferenze.CancellaConferenzaPassata(conferenza.Id);
+
+        // if (conferenza.Id % 2 == 0)
+        // {
+        //     conferenze?.Remove(conferenza);
+        // }
+    }
+}

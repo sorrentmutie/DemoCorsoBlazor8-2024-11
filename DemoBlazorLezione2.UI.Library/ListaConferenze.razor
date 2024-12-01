@@ -1,0 +1,60 @@
+﻿@using DemoBlazorLezione2.Core.Conferenze
+
+<h3>@Titolo</h3>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Luogo</th>
+            <th>Data Inizio</th>
+            <th>Completata</th>
+            <th>Prezzo</th>
+            <th></th>
+        </tr>
+
+    </thead>
+    <tbody>
+    @foreach (var conferenza in Conferenze)
+    {
+        <tr>
+            <td>@conferenza.Id</td>
+            <td>@conferenza.Nome</td>
+            <td>@conferenza.Luogo</td>
+            <td>@conferenza.DataInizio.ToShortDateString()</td>
+            <td>@conferenza.Completata</td>
+            <td>@conferenza.Prezzo</td>
+            <td>
+                <button type="button" class="btn btn-danger"
+                @onclick="() => OnConferenzaCancellata.InvokeAsync(conferenza)">Elimina</button></td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@code {
+    [Parameter]
+    public List<Conferenza> Conferenze { get; set; } = new();
+    [Parameter]
+    public string Titolo { get; set; } = "";
+    [Parameter]
+    public EventCallback<Conferenza> OnConferenzaCancellata { get; set; }
+
+
+    protected override void OnInitialized()
+    {
+
+    }
+
+    protected override void OnParametersSet()
+    {
+
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+
+    }
+
+}
