@@ -27,7 +27,11 @@
             <td>@conferenza.Prezzo</td>
             <td>
                 <button type="button" class="btn btn-danger"
-                @onclick="() => OnConferenzaCancellata.InvokeAsync(conferenza)">Elimina</button></td>
+                       @onclick="() => OnConferenzaCancellata.InvokeAsync(conferenza)">Elimina</button>
+                <button class="btn btn-warning"
+                       @onclick="() => OnConferenzaModificata.InvokeAsync(conferenza)">Modifica</button>
+            
+            </td>
         </tr>
     }
     </tbody>
@@ -40,6 +44,8 @@
     public string Titolo { get; set; } = "";
     [Parameter]
     public EventCallback<Conferenza> OnConferenzaCancellata { get; set; }
+    [Parameter]
+    public EventCallback<Conferenza> OnConferenzaModificata { get; set; }
 
 
     protected override void OnInitialized()

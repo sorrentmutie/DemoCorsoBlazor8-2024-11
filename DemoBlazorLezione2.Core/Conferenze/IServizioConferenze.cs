@@ -7,4 +7,7 @@ public interface IServizioConferenze
     void CancellaConferenzaPassata(int id);
     void CancellaConferenzaFutura(int id);
 
+    Task AggiungiConferenzaAsync(Conferenza conferenzaNuova);
+    Task ModificaConferenzaAsync(Conferenza conferenzaModificata);
+    Task<List<Conferenza>?> EstraiConferenzeFutureAsync();
 }

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.12.35521.163 d17.12
+VisualStudioVersion = 17.12.35521.163
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoBlazorLezione2", "DemoBlazorLezione2\DemoBlazorLezione2.csproj", "{69D2342C-396E-41CF-A2D9-1F8D3EB0E5C5}"
 EndProject

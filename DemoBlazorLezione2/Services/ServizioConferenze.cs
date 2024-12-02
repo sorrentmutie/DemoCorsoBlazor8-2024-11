@@ -58,4 +58,30 @@ public class ServizioConferenze : IServizioConferenze
     {
         return conferenzePassate;
     }
+
+    public async Task AggiungiConferenzaAsync(Conferenza conferenzaNuova)
+    {
+        await Task.Delay(1000);
+        conferenzaNuova.Id = conferenzeFuture.Max(c => c.Id) + 1;
+        conferenzeFuture.Add(conferenzaNuova);
+    }
+
+    public async Task ModificaConferenzaAsync(Conferenza conferenzaModificata)
+    {
+        await Task.Delay(1000);
+        var conferenzaDaModificare = conferenzeFuture.FirstOrDefault(c => c.Id == conferenzaModificata.Id);
+        if(conferenzaDaModificare != null)
+        {
+            conferenzaDaModificare.Nome = conferenzaModificata.Nome;
+            conferenzaDaModificare.Luogo = conferenzaModificata.Luogo;
+            conferenzaDaModificare.DataInizio = conferenzaModificata.DataInizio;
+            conferenzaDaModificare.Completata = conferenzaModificata.Completata;
+        }
+    }
+
+    public async Task<List<Conferenza>?> EstraiConferenzeFutureAsync()
+    {
+        await Task.Delay(1000);
+        return conferenzeFuture;
+    }
 }
