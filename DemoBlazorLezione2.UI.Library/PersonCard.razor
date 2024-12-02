@@ -1,0 +1,12 @@
+﻿@if (Person is not null)
+{
+    <div>
+        <h4> @Person.first_name @Person.last_name</h4>
+        <p>@Person.email</p>
+        <img src="@Person.avatar" />
+    </div>
+}
+
+@code {
+    [Parameter] public Person? Person { get; set; }
+}

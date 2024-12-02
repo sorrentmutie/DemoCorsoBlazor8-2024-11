@@ -1,0 +1,10 @@
+﻿@if(People is not null){
+    @foreach (var person in People)
+    {
+        <PersonCard Person="person"></PersonCard>
+    }
+}
+
+@code {
+    [Parameter] public List<Person>? People { get; set; } = new();
+}

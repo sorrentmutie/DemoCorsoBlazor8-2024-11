@@ -1,0 +1,18 @@
+﻿@page "/conferenzepassate"
+@inject IServizioConferenze servizioConferenze
+
+
+<h3>Gestione Conferenze Passate</h3>
+
+<ListaConferenze Conferenze="conferenze"/>
+
+
+
+@code {
+    private List<Conferenza>? conferenze = new();
+
+    protected override void OnInitialized()
+    {
+        conferenze = servizioConferenze.EstraiConferenzePassate();
+    }
+}

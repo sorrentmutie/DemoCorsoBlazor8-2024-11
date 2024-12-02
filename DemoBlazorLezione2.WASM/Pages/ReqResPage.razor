@@ -1,0 +1,33 @@
+﻿@page "/reqres"
+@inject IReqResData servizioReqRes
+
+
+<MyBootstrapSpinner IsVisible="isLoading"/>
+
+<ReqResPeople People="people"></ReqResPeople>
+<button @onclick="AnnullaRichiesta">Annulla Richiesta</button>
+@errorMessage
+
+@code {
+    private List<Person>? people { get; set; }
+    private bool isLoading { get; set; }
+    private string errorMessage = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        isLoading = true;
+        var reqresData = await servizioReqRes.GetPeopleAsync();
+        if (reqresData != null)
+        {
+            people = reqresData.People?.ToList();
+        }
+        isLoading = false;
+    }
+
+    private void AnnullaRichiesta()
+    {
+        servizioReqRes.CancelRequest();
+        isLoading = false;
+        errorMessage = "Richiesta annullata";
+    }
+}

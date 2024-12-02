@@ -1,0 +1,32 @@
+﻿@using DemoBlazorLezione2.Core.Northwind
+@inject ICategoryData servizioCategorie
+
+@if (categorie == null)
+{
+    <MyBootstrapSpinner IsVisible="true" />
+}
+else
+{
+        @foreach (var categoria in categorie)
+        {
+            <div>@categoria.Nome  @categoria.Descrizione @categoria.NumeroProdotti  
+
+            @foreach (var prodotto in categoria.Prodotti)
+            {
+                <p>@prodotto.Nome</p>
+            }
+
+            </div>
+        }
+}
+
+
+@code {
+    List<CategoriaDTO>? categorie;
+
+    protected override async Task OnInitializedAsync()
+    {
+        categorie = await servizioCategorie.EstraiCategorieAsync();
+    }
+
+}

@@ -8,11 +8,17 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DemoBlazorLezione2.Core\DemoBlazorLezione2.Core.csproj" />
+    <ProjectReference Include="..\DemoBlazorLezione2.Data\DemoBlazorLezione2.Data.csproj" />
     <ProjectReference Include="..\DemoBlazorLezione2.UI.Library\DemoBlazorLezione2.UI.Library.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="wwwroot\css\bootstrap\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.11" />
   </ItemGroup>
 
 </Project>

@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoBlazorLezione2.Core", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoBlazorLezione2.UI.Library", "DemoBlazorLezione2.UI.Library\DemoBlazorLezione2.UI.Library.csproj", "{8555AC95-DEA5-45AC-A654-F2B3EA273223}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoBlazorLezione2.WASM", "DemoBlazorLezione2.WASM\DemoBlazorLezione2.WASM.csproj", "{15BCB547-2C59-44F3-9BE8-E923324E6217}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoBlazorLezione2.Data", "DemoBlazorLezione2.Data\DemoBlazorLezione2.Data.csproj", "{5FC1B5D4-2BD7-405B-9F00-FAACABA9B0AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{8555AC95-DEA5-45AC-A654-F2B3EA273223}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8555AC95-DEA5-45AC-A654-F2B3EA273223}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8555AC95-DEA5-45AC-A654-F2B3EA273223}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15BCB547-2C59-44F3-9BE8-E923324E6217}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15BCB547-2C59-44F3-9BE8-E923324E6217}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15BCB547-2C59-44F3-9BE8-E923324E6217}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15BCB547-2C59-44F3-9BE8-E923324E6217}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FC1B5D4-2BD7-405B-9F00-FAACABA9B0AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FC1B5D4-2BD7-405B-9F00-FAACABA9B0AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FC1B5D4-2BD7-405B-9F00-FAACABA9B0AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FC1B5D4-2BD7-405B-9F00-FAACABA9B0AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

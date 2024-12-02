@@ -1,8 +1,11 @@
 using BlazorAppCorretta.Services;
 using Demo.Core.Conferenze;
 using DemoBlazorLezione2.Core.Conferenze;
+using DemoBlazorLezione2.Core.Northwind;
 using DemoBlazorLezione2.Data;
+using DemoBlazorLezione2.Data.Models;
 using DemoBlazorLezione2.Services;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +16,15 @@ builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddScoped<IServizioConferenze, ServizioConferenze>();
 builder.Services.AddScoped<IUfficioCommerciale, UfficioCommerciale>();
 builder.Services.AddScoped<IMarketing, Marketing>();
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+builder.Services.AddDbContext<NorthwindContext>(o =>
+{
+    o.UseSqlServer(connectionString);
+});
+
+builder.Services.AddScoped<ICategoryData, CategorieSQLServer>();
 
 
 var app = builder.Build();
