@@ -1,0 +1,83 @@
+﻿@page "/callingjavascript"
+@using DemoBlazorLezione2.WASM.Interop
+@inject IJSRuntime JSRuntime    
+
+
+<h3>Calling JavaScript</h3>
+<button @onclick="CallJavaScript">Call JavaScript</button>
+<button @onclick="CallStatic">Invoca metodo statico da JavaScript</button>
+<button @onclick="CallReference">Call Reference Method</button>
+<button @onclick="OpenModal" >Apri Modale</button>
+@somma
+
+<MyModal Title="Mio titolo" Id="@idModale"
+OnSave="Save">
+
+<ChildContent>
+    <p>Primo Paragrafo</p>
+    <p>Secondo Paragrafo</p>
+</ChildContent>
+
+
+</MyModal>
+
+
+
+@code {
+    private int somma = 0;
+    private MioInterop? mioInterop;
+    private string idModale = "miaPrimaModale";
+
+    protected override void OnInitialized()
+    {
+        mioInterop = new MioInterop(JSRuntime);
+    }
+
+    private async Task CallJavaScript()
+    {
+        // somma =  await JSRuntime.InvokeAsync<int>("miaSomma", 4, 7);
+        if (mioInterop == null)
+        {
+            mioInterop = new MioInterop(JSRuntime);
+        };
+        somma = await mioInterop.Somma(4, 7);   
+    }
+
+    [JSInvokable]
+    public static int MiaSommaSpeciale(int a, int b)
+    {
+        return a*a + b*b;
+    }
+
+    private async Task CallStatic()
+    {
+        await JSRuntime.InvokeVoidAsync("invocaCSharp");
+    }
+
+    private async Task CallReference()
+    {
+        if (mioInterop == null)
+        {
+            mioInterop = new MioInterop(JSRuntime);
+        }
+        await mioInterop.SayHello("Salvatore");
+    }
+
+    private async Task Save()
+    {
+        if (mioInterop == null)
+        {
+            mioInterop = new MioInterop(JSRuntime);
+        }
+        await mioInterop.CloseModal();
+    }
+
+    private async Task OpenModal()
+    {
+        if (mioInterop == null)
+        {
+            mioInterop = new MioInterop(JSRuntime);
+        }
+        await mioInterop.OpenModal(idModale);
+    }
+}
