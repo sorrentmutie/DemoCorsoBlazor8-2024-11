@@ -1,6 +1,6 @@
 ﻿using Microsoft.JSInterop;
 
-namespace DemoBlazorLezione2.WASM.Interop;
+namespace DemoBlazorLezione2.UI.Library.Interop;
 
 public class HelloHelper
 {

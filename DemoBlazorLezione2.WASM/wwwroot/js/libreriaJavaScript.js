@@ -32,3 +32,12 @@ window.hideModal = () => {
     }
 }
 
+window.showMap = (id, mapParameters) => {
+    var mapConId = L.map(id);
+    mapConId.remove();
+    var map = L.map(id).setView([mapParameters.latitude, mapParameters.longitude], mapParameters.zoom);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+}

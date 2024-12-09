@@ -1,25 +1,31 @@
 ﻿@page "/callingjavascript"
-@using DemoBlazorLezione2.WASM.Interop
-@inject IJSRuntime JSRuntime    
+@using DemoBlazorLezione2.UI.Library.Interop
+@using DemoBlazorLezione2.Core
+@inject IJSRuntime JSRuntime
 
 
 <h3>Calling JavaScript</h3>
 <button @onclick="CallJavaScript">Call JavaScript</button>
 <button @onclick="CallStatic">Invoca metodo statico da JavaScript</button>
 <button @onclick="CallReference">Call Reference Method</button>
-<button @onclick="OpenModal" >Apri Modale</button>
+<button @onclick="OpenModal">Apri Modale</button>
+@* <button @onclick="ShowMap">Apri Mappa</button> *@
+@* <button @onclick="ChangeWidth">Cambia larghezza</button> *@
 @somma
 
 <MyModal Title="Mio titolo" Id="@idModale"
 OnSave="Save">
 
-<ChildContent>
-    <p>Primo Paragrafo</p>
-    <p>Secondo Paragrafo</p>
-</ChildContent>
-
+    <ChildContent>
+        <p>Primo Paragrafo</p>
+        <p>Secondo Paragrafo</p>
+    </ChildContent>
 
 </MyModal>
+
+<MyMap Id="map1" Width="@initialWidth" MapParameters="mapParameters"></MyMap>
+<br />
+<MyMap Id="map2" Width="30%" MapParameters="mapParameters"></MyMap>
 
 
 
@@ -27,6 +33,14 @@ OnSave="Save">
     private int somma = 0;
     private MioInterop? mioInterop;
     private string idModale = "miaPrimaModale";
+    private MapParameters mapParameters = new()
+        {
+            Latitude = 44.3564946,
+            Longitude = 11.7158235,
+            Zoom = 13,
+        };
+
+    private string initialWidth = "50%";
 
     protected override void OnInitialized()
     {
@@ -40,13 +54,13 @@ OnSave="Save">
         {
             mioInterop = new MioInterop(JSRuntime);
         };
-        somma = await mioInterop.Somma(4, 7);   
+        somma = await mioInterop.Somma(4, 7);
     }
 
     [JSInvokable]
     public static int MiaSommaSpeciale(int a, int b)
     {
-        return a*a + b*b;
+        return a * a + b * b;
     }
 
     private async Task CallStatic()
@@ -80,4 +94,19 @@ OnSave="Save">
         }
         await mioInterop.OpenModal(idModale);
     }
+
+    // private async Task ShowMap()
+    // {
+    //     if (mioInterop == null)
+    //     {
+    //         mioInterop = new MioInterop(JSRuntime);
+    //     }
+
+    //     await mioInterop.ShowMap("map1", mapParameters);
+    //     await mioInterop.ShowMap("map2", mapParameters);
+    // }
+
+    // private void ChangeWidth() {
+    //     initialWidth = "90%";
+    // }
 }

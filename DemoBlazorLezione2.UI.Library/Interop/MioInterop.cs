@@ -1,6 +1,7 @@
-﻿using Microsoft.JSInterop;
+﻿using DemoBlazorLezione2.Core;
+using Microsoft.JSInterop;
 
-namespace DemoBlazorLezione2.WASM.Interop;
+namespace DemoBlazorLezione2.UI.Library.Interop;
 
 public class MioInterop: IDisposable
 {
@@ -40,5 +41,10 @@ public class MioInterop: IDisposable
     public async Task CloseModal()
     {
         await jSRuntime.InvokeVoidAsync("hideModal");
+    }
+    
+    public async Task ShowMap(string id, MapParameters mapParameters)
+    {
+        await jSRuntime.InvokeVoidAsync("showMap", id, mapParameters);
     }
 }

@@ -1,0 +1,37 @@
+﻿@using DemoBlazorLezione2.Core
+@using DemoBlazorLezione2.UI.Library.Interop
+@using Microsoft.JSInterop
+@inject IJSRuntime JSRuntime
+
+<div id="@Id" style="height: @Height; width:@Width"></div>
+
+@code {
+    private MioInterop? mioInterop;
+
+    [Parameter]
+    public string Id { get; set; } = "map";
+    [Parameter]
+    public string Height { get; set; } = "300px";
+    [Parameter]
+    public string Width { get; set; } = "50%";
+    [Parameter]
+    public MapParameters MapParameters { get; set; } = new();
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            if (mioInterop == null)
+            {
+                mioInterop = new MioInterop(JSRuntime);
+            }
+            await mioInterop.ShowMap(Id, MapParameters);
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        mioInterop = new MioInterop(JSRuntime);
+    }
+
+}
