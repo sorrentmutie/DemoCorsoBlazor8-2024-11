@@ -1,7 +1,35 @@
 ﻿@page "/"
+@inject IJSRuntime JSRuntime
 
 <PageTitle>Home</PageTitle>
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
+
+<Component1></Component1>
+<button @onclick="ClickMe">Click me</button>
+@somma
+
+@code {
+    ExampleJsInterop? myInterop;
+    int somma = 0;
+
+    protected override void OnInitialized()
+    {
+        myInterop = new ExampleJsInterop(JSRuntime);    
+    }
+
+    private async Task ClickMe()
+    {
+        if (myInterop == null)
+        {
+            myInterop = new ExampleJsInterop(JSRuntime);
+        }
+        await myInterop.Prompt("Hello from Blazor!");
+
+        somma = await myInterop.MiaSommaModulare(4, 7);
+
+    }
+
+}

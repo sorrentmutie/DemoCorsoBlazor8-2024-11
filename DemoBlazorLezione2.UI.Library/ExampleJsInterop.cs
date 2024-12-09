@@ -12,12 +12,23 @@ namespace DemoBlazorLezione2.UI.Library
     public class ExampleJsInterop : IAsyncDisposable
     {
         private readonly Lazy<Task<IJSObjectReference>> moduleTask;
+        private readonly Lazy<Task<IJSObjectReference>> mymoduleTask;
 
         public ExampleJsInterop(IJSRuntime jsRuntime)
         {
             moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
                 "import", "./_content/DemoBlazorLezione2.UI.Library/exampleJsInterop.js").AsTask());
+
+            mymoduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
+                "import", "./_content/DemoBlazorLezione2.UI.Library/MyModule.js").AsTask());
         }
+
+
+        public async ValueTask<int> MiaSommaModulare(int a, int b) {
+            var module = await mymoduleTask.Value;
+            return await module.InvokeAsync<int>("miaSomma", a, b);
+        }
+
 
         public async ValueTask<string> Prompt(string message)
         {
@@ -32,6 +43,13 @@ namespace DemoBlazorLezione2.UI.Library
                 var module = await moduleTask.Value;
                 await module.DisposeAsync();
             }
+
+            if(mymoduleTask.IsValueCreated)
+            {
+                var module = await mymoduleTask.Value;
+                await module.DisposeAsync();
+            }
+
         }
     }
 }

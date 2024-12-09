@@ -1,7 +1,4 @@
-﻿window.miaSomma = (a, b) => a + b;
-
-
-window.mioFetch = () => {
+﻿window.mioFetch = () => {
     fetch('https://jsonplaceholder.typicode.com/todos/1')
         .then(response => response.json())
         .then(json => {
